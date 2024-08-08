@@ -1,0 +1,101 @@
+---
+title: "Growth"
+author: "Aedan L"
+execute:
+  warning: false
+  echo: false
+  message: false
+---
+```{r}
+library(quantmod)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r load-data}
+# Load S&P 500 data
+getSymbols("^GSPC", from = "1980-01-01", to = Sys.Date(), auto.assign = TRUE)
+sp500 <- Cl(GSPC) %>% as.data.frame()
+sp500$Date <- index(GSPC) # Ensure the Date column is correctly set up
+colnames(sp500) <- c("Close", "Date")
+```
+
+```{r setup}
+# Update presidential terms with the current data
+presidents <- data.frame(
+  President = c("Ronald Reagan 1", "Ronald Reagan 2", "George H. W. Bush",
+                "Bill Clinton 1", "Bill Clinton 2", "George W. Bush 1",
+                "George W. Bush 2", "Barack Obama 1", "Barack Obama 2",
+                "Donald Trump", "Joe Biden"),
+  Start = as.Date(c("1981-01-20", "1985-01-20", "1989-01-20",
+                    "1993-01-20", "1997-01-20", "2001-01-20",
+                    "2005-01-20", "2009-01-20", "2013-01-20",
+                    "2017-01-20", "2021-01-20")),
+  End = as.Date(c("1985-01-19", "1989-01-19", "1993-01-19",
+                  "1997-01-19", "2001-01-19", "2005-01-19",
+                  "2009-01-19", "2013-01-19", "2017-01-19",
+                  "2021-01-19", "2025-01-19")),
+  Party = c("Republican", "Republican", "Republican",
+            "Democrat", "Democrat", "Republican",
+            "Republican", "Democrat", "Democrat",
+            "Republican", "Democrat"),
+  Growth = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 36)
+)
+```
+
+```{r calculate-growth}
+# Recalculate growth with the updated end date
+presidents$Growth <- sapply(1:nrow(presidents), function(i) {
+  start_index <- which.min(abs(sp500$Date - presidents$Start[i]))
+  end_index <- which.min(abs(sp500$Date - presidents$End[i]))
+  if (length(start_index) > 0 && length(end_index) > 0) {
+    start_price <- sp500$Close[start_index]
+    end_price <- sp500$Close[end_index]
+    return((end_price - start_price) / start_price * 100) # Growth in percentage
+  } else {
+    return(NA)
+  }
+})
+```
+
+```{r}
+# Set the factor levels explicitly to maintain chronological order
+presidents$President <- factor(presidents$President, levels = c(
+  "Ronald Reagan 1", "Ronald Reagan 2", "George H. W. Bush",
+  "Bill Clinton 1", "Bill Clinton 2", "George W. Bush 1",
+  "George W. Bush 2", "Barack Obama 1", "Barack Obama 2",
+  "Donald Trump", "Joe Biden"
+))
+
+# Create the histogram with bars ordered by the presidents' terms as specified
+ggplot(presidents, aes(x = President, y = Growth, fill = Party)) +
+  geom_col(show.legend = TRUE, alpha = 0.5) +
+  scale_fill_manual(values = c("Republican" = "red", "Democrat" = "blue")) +
+  labs(title = "S&P 500 Growth During Each Presidential Term",
+       x = "President",
+       y = "Percentage Growth") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) # Adjust text angle for better legibility
+```
+<span class = "smaller-text">
+<table>
+<caption>S&P 500 Growth During Presidential Terms</caption>
+
+
+<th>President</th>
+<th>Term Start</th>
+<th>Term End</th>
+<th>Party</th>
+<th>S&P 500 Growth (%)</th>
+
+```{r echo=FALSE}
+        library(dplyr)
+        
+        # Display the data for the table
+        presidents %>%
+          select(President, Start, End, Party, Growth) %>%
+          arrange(Start) %>%
+          knitr::kable()
+```
+</span>
+</table>

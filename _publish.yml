@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 47a2e395-911b-4007-a23c-d80538462b0c
+      url: 'https://aedan.quarto.pub/gscp-final-proj'

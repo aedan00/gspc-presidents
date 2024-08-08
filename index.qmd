@@ -1,0 +1,92 @@
+---
+title: "Stock Market Performance Under Different Presidents"
+author: "Aedan L"
+execute:
+  warning: false
+  echo: false
+  message: false
+---
+
+
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(quantmod)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+# Get historical data for the S&P 500
+getSymbols("^GSPC", from = "1980-01-01", to = Sys.Date(), auto.assign = TRUE)
+sp500 <- Cl(GSPC) %>% as.data.frame()
+sp500$Date <- index(GSPC) # Correctly define Date column
+colnames(sp500) <- c("Close", "Date") # Ensure the column names are set correctly
+
+```
+
+```{r setup-presidents}
+
+# Define presidential terms and their party affiliations
+presidents <- data.frame(
+  Start = as.Date(c("1981-01-20", "1985-01-20", "1989-01-20",
+                    "1993-01-20", "1997-01-20", "2001-01-20",
+                    "2005-01-20", "2009-01-20", "2013-01-20",
+                    "2017-01-20", "2021-01-20", "2025-01-20")),
+  End = as.Date(c("1985-01-19", "1989-01-19", "1993-01-19",
+                  "1997-01-19", "2001-01-19", "2005-01-19",
+                  "2009-01-19", "2013-01-19", "2017-01-19",
+                  "2021-01-19", "2025-01-19", Sys.Date())),
+  Party = c("Republican", "Republican", "Republican",
+            "Democrat", "Democrat", "Republican",
+            "Republican", "Democrat", "Democrat",
+            "Republican", "Democrat", "Democrat")
+)
+```
+
+```{r}
+# Create a plot with colored bands for presidential terms
+ggplot(sp500, aes(x = Date, y = Close)) +
+  geom_rect(data = presidents, inherit.aes = FALSE, aes(xmin = Start, xmax = End, ymin = -Inf, ymax = Inf, fill = Party), alpha = 0.2) +
+  scale_fill_manual(values = c("Republican" = "red", "Democrat" = "blue")) +
+  geom_line(color = "black") + # Add a black line for the S&P 500 closing prices
+  labs(title = "S&P 500 Performance Under Different Presidents",
+       subtitle = "Colored bands indicate the presidential terms with their respective party",
+       x = "Date",
+       y = "Closing Price") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+---
+
+<div class="grid-container">
+
+  <div class="grid-item">
+<a href="growth.qmd">
+<img src="growth-image-datascience-proj.png" alt="text" width="150" />
+<span class="mini-text">Click to visit "Growth"</span>
+</a>
+  </div>
+  
+  <div class="grid-item">
+<a href="sources.qmd">
+<span class="main-text">Sources</span>
+<span class="sub-text">View project sources</span>
+</a>
+  </div>
+  
+  <div class="grid-item">
+<a href="about.qmd">
+<span class="main-text">About</span>
+<span class="sub-text">View information about this project</span>
+</a>
+  </div>
+  
+</div>
+
+---
+
+The stock market's performance varies upon different presidential administrations.
+Stock market correlation with presidential terms allows us to see the movement of the S&P 500 during periods of time. This dataset uses quantmod and dplyr to obtain all stock market data and movement.
+Although there are periods of time where the stock market falls or stagnates, it tends to move upwards in the long-term.

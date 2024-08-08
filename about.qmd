@@ -1,0 +1,14 @@
+---
+title: "About"
+---
+
+Hi, my name is Aedan. (Class of 2027).  
+My email is: u2rjal@gmail.com  
+
+This project about the correlation of the stock market (S&P 500), and US presidents is located in a repository [here](https://github.com/aedan00/gspc-presidents).  
+
+This project is also related to another past project [here](https://github.com/aedan00/gspc-project).
+
+Both projects were created as a part of [Kane's Data Science Bootcamp](https://bootcamp.davidkane.info/).  
+
+Site Last Updated: **8/5/2024**

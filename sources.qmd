@@ -1,0 +1,9 @@
+---
+title: "Sources"
+---
+
+All stock market data in the project comes from the "quantmod" library.  
+
+The project utilized ggplot to create a viewable graph.  
+
+Special thanks to ChatGPT for helping transform data into the plots.  

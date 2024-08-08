@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "sources.html",
+    "href": "sources.html",
+    "title": "Sources",
+    "section": "",
+    "text": "All stock market data in the project comes from the “quantmod” library.\nThe project utilized ggplot to create a viewable graph.\nSpecial thanks to ChatGPT for helping transform data into the plots."
+  },
+  {
+    "objectID": "growth.html",
+    "href": "growth.html",
+    "title": "Growth",
+    "section": "",
+    "text": "[1] \"GSPC\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nS&P 500 Growth During Presidential Terms\n\n\nPresident\n\n\nTerm Start\n\n\nTerm End\n\n\nParty\n\n\nS&P 500 Growth (%)\n\n\n\n\nPresident\nStart\nEnd\nParty\nGrowth\n\n\n\n\nRonald Reagan 1\n1981-01-20\n1985-01-19\nRepublican\n30.13294\n\n\nRonald Reagan 2\n1985-01-20\n1989-01-19\nRepublican\n63.73339\n\n\nGeorge H. W. Bush\n1989-01-20\n1993-01-19\nRepublican\n51.80895\n\n\nBill Clinton 1\n1993-01-20\n1997-01-19\nDemocrat\n79.22330\n\n\nBill Clinton 2\n1997-01-20\n2001-01-19\nDemocrat\n72.85181\n\n\nGeorge W. Bush 1\n2001-01-20\n2005-01-19\nRepublican\n-11.76204\n\n\nGeorge W. Bush 2\n2005-01-20\n2009-01-19\nRepublican\n-31.49455\n\n\nBarack Obama 1\n2009-01-20\n2013-01-19\nDemocrat\n84.54336\n\n\nBarack Obama 2\n2013-01-20\n2017-01-19\nDemocrat\n52.33650\n\n\nDonald Trump\n2017-01-20\n2021-01-19\nRepublican\n67.25633\n\n\nJoe Biden\n2021-01-20\n2025-01-19\nDemocrat\n38.80499"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Hi, my name is Aedan. (Class of 2027).\nMy email is: u2rjal@gmail.com\nThis project about the correlation of the stock market (S&P 500), and US presidents is located in a repository here.\nThis project is also related to another past project here.\nBoth projects were created as a part of Kane’s Data Science Bootcamp.\nSite Last Updated: 8/5/2024"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Stock Market Performance Under Different Presidents",
+    "section": "",
+    "text": "[1] \"GSPC\"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  Click to visit “Growth” \n\n\n Sources View project sources \n\n\n About View information about this project \n\n\n\nThe stock market’s performance varies upon different presidential administrations. Stock market correlation with presidential terms allows us to see the movement of the S&P 500 during periods of time. This dataset uses quantmod and dplyr to obtain all stock market data and movement. Although there are periods of time where the stock market falls or stagnates, it tends to move upwards in the long-term."
+  }
+]
